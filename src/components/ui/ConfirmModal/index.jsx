@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "../Modal";
 import styles from "./styles.module.scss";
-import Button from "../../FormComponents/Button";
+import Button from "../../form/Button";
 
 const ConfirmModal = ({active, title, message, setActive, approve, loading}) => {
   return (

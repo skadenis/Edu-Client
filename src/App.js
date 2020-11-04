@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from "react";
+import styles from "./styles.module.scss";
+import {BrowserRouter} from "react-router-dom";
+import Login from "./components/global/Login";
+import Header from "./components/global/Header";
+import Sidebar from "./components/global/Sidebar";
+import Content from "./components/global/Content";
 
-function App() {
+const App = () => {
+
+  const [loading, setLoading] = useState(false);
+  const [isAuth, setIsAuth] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setIsAuth(false);
+    }, 500);
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      {loading ? <div>Загрузка...</div>
+        : <div className={styles.app}>
+          <div className={styles.app__wrap}>
+            <Login setIsAuth={setIsAuth} active={!isAuth}/>
+            <div className={styles.app__wrapper}>
+              <Header/>
+              <div className={styles.app__container}>
+                <Sidebar/>
+                <Content/>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </BrowserRouter>
   );
-}
+};
 
 export default App;

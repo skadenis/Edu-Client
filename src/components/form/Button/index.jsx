@@ -3,10 +3,10 @@ import styles from "./styles.module.scss";
 import {ReactComponent as Spinner} from "../../../assets/spinner.svg";
 import classNames from "classnames";
 
-const Button = ({children, onClick, disabled, loading, primary, warning, save, className}) => {
+const Button = ({children, onClick, disabled, loading, primary, warning, save, className, fullWidth}) => {
   return (
     <button
-      className={classNames(styles.button, {[styles.primary]: primary}, {[styles.warning]: warning}, {[styles.save]: save}, className)}
+      className={classNames(styles.button, {[styles.primary]: primary}, {[styles.warning]: warning}, {[styles.save]: save}, {[styles.fullWidth] : fullWidth}, className)}
       onClick={onClick}
       disabled={disabled}
     >

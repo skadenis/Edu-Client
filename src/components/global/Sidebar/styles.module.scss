@@ -3,13 +3,19 @@
   flex-direction: column;
   background-color: #fff;
   border-radius: 4px 4px 0 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  width: 210px;
 }
 
 .link {
-  padding: 20px;
-  border-bottom: 1px solid #ddd;
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   color: #000;
   text-decoration: none;
+  transition: 0.3s;
 
   &:hover {
     text-decoration: underline;
@@ -20,6 +26,6 @@
     color: #000;
     text-decoration: none;
     font-weight: 600;
-    padding: 20px 20px 20px 24px;
+    padding: 12px 20px 12px 24px;
   }
 }
