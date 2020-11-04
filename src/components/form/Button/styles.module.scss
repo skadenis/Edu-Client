@@ -1,0 +1,34 @@
+.button {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px 20px;
+  background-color: #fff;
+  cursor: pointer;
+  max-height: 40px;
+  height: 40px;
+  margin-bottom: 10px;
+
+  &:disabled {
+    background-color: #a0a0a0;
+    cursor: not-allowed;
+  }
+}
+
+.primary {
+  background-color: #556fb7;
+  color: #fff;
+}
+
+.warning {
+  background-color: #f96565;
+  color: #fff;
+}
+
+.save {
+  background-color: #498649;
+  color: #fff;
+}
+
+.spinner {
+  max-height: 100%;
+}

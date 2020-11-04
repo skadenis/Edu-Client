@@ -1,0 +1,25 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 4px 4px 0 0;
+}
+
+.link {
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+  color: #000;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &__active {
+    border-bottom: 1px solid #ddd;
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 20px 20px 20px 24px;
+  }
+}

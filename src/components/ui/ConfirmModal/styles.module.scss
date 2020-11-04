@@ -1,0 +1,13 @@
+.confirmModal {
+  &__message {
+    margin-bottom: 20px;
+    line-height: 21px;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+}

@@ -1,0 +1,14 @@
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 20px;
+
+  &__title {
+    font-weight: 600;
+  }
+}
+
+.dividered {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 8px;
+}
