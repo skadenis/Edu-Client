@@ -1,0 +1,17 @@
+.table {
+  border-radius: 4px;
+  background-color: #e9ecf7;
+  margin-bottom: 20px;
+
+  &__title {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 10px 20px;
+    border-bottom: 1px solid #fff;
+  }
+
+  &__content {
+    width: 100%;
+  }
+}

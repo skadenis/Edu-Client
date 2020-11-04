@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./styles.module.scss";
 
-const HomePage = () => {
+const HelpPage = () => {
   return (
-    <div className={styles.home}>
-      Home page
+    <div className={styles.help}>
+      Help page
     </div>
   )
 }
 
-export default HomePage;
+export default HelpPage;

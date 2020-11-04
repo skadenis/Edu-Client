@@ -4,14 +4,26 @@
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: 100;
-  background-color: rgba(0, 0, 0, 0.2);
+  z-index: -1;
+  background-color: transparent;
+  transition: 0.3s;
+
+  &__show {
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.2);
+
+    .modal {
+      &__wrapper {
+        transform: translateY(-50%) translateX(-50%);
+      }
+    }
+  }
 
   &__wrapper {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateY(100vh) translateX(-50%);
     max-width: 400px;
     width: 100%;
     min-height: 100px;
@@ -19,6 +31,7 @@
     border-radius: 4px;
     padding: 20px;
     box-shadow: var(--p-card-shadow,0 0 0 1px rgba(63,63,68,.05),0 1px 3px 0 rgba(63,63,68,.15));
+    transition: 0.3s;
   }
 
   &__title {

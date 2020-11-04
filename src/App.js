@@ -1,26 +1,32 @@
 import React, {useEffect, useState} from "react";
 import styles from "./styles.module.scss";
-import {BrowserRouter} from "react-router-dom";
+import {BrowserRouter, withRouter, useHistory} from "react-router-dom";
 import Login from "./components/global/Login";
 import Header from "./components/global/Header";
 import Sidebar from "./components/global/Sidebar";
 import Content from "./components/global/Content";
 
-const App = () => {
+const App = (props) => {
 
   const [loading, setLoading] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setIsAuth(false);
-    }, 500);
-  }, [])
+    if (props.location.pathname === "/") {
+      history.push("/schedule");
+    }
+    setLoading(false);
+    // setLoading(true);
+    // setTimeout(() => {
+    //   setLoading(false);
+    //   setIsAuth(false);
+    // }, 500);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.location.pathname])
 
   return (
-    <BrowserRouter>
+    <>
       {loading ? <div>Загрузка...</div>
         : <div className={styles.app}>
           <div className={styles.app__wrap}>
@@ -35,8 +41,18 @@ const App = () => {
           </div>
         </div>
       }
-    </BrowserRouter>
+    </>
   );
 };
 
-export default App;
+export const AppWithRouter = withRouter(App);
+
+const RouterApp = () => {
+  return (
+    <BrowserRouter>
+      <AppWithRouter />
+    </BrowserRouter>
+  )
+}
+
+export default RouterApp;

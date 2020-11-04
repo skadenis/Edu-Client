@@ -1,0 +1,42 @@
+.groupItem {
+  display: grid;
+  grid-template-columns: 30px 1fr 1fr 1fr;
+  align-items: center;
+  border-bottom: 1px solid #fff;
+  padding: 0 20px;
+  height: 60px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.scheduleItem {
+  display: grid;
+  grid-template-columns: 30px 1fr 70px 1fr 150px;
+  align-items: center;
+  border-bottom: 1px solid #fff;
+  padding: 0 20px;
+  height: 60px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &__link {
+    text-decoration: none;
+    text-align: center;
+    color: #c54545;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.homework {
+  margin-bottom: 10px;
+}
