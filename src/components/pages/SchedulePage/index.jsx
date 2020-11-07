@@ -1,82 +1,128 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./styles.module.scss";
+import videoIcon from "../../../assets/videoIcon.svg";
 import Page from "../../ui/Page";
 import Table from "../../ui/Table";
-import Button from "../../form/Button";
 import Modal from "../../ui/Modal";
+import {userApi} from "../../../api";
+import moment from "moment";
+import 'moment-timezone';
 
 const SchedulePage = () => {
 
+  const [loading, setLoading] = useState(false);
   const [activeModal, setActiveModal] = useState(false);
-  const [activeModalSecond, setActiveModalSecond] = useState(false);
+  const [groups, setGroups] = useState([]);
+  const [lessons, setLessons] = useState([]);
+  const [homeworks, setHomeworks] = useState([]);
 
-  return (
+  useEffect(() => {
+    const fetchGroups = async () => {
+      setLoading(true);
+      try {
+        const data = await userApi.getGroupsList();
+        setGroups(data);
+      } catch (e) {
+        console.log("Get groups list error: ", e);
+      } finally {
+        setLoading(false);
+      }
+    }
+    const fetchLessons = async () => {
+      setLoading(true);
+      try {
+        const data = await userApi.getUserLessons();
+        setLessons(data);
+      } catch (e) {
+        console.log("Get lessons list error: ", e);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchGroups();
+    fetchLessons();
+  }, []);
+
+  const handleShowHomeworkModal = (lessonHomeworks) => {
+    setHomeworks(lessonHomeworks);
+    setActiveModal(true);
+  };
+
+  const handleCloseModal = (active) => {
+    setHomeworks([]);
+    setActiveModal(active);
+  }
+
+  const tableScheduleHead =
+    <p className={styles.scheduleRow}>
+      <span className={styles.scheduleRow__item}>Номер</span>
+      <span className={styles.scheduleRow__item}>Название урока</span>
+      <span className={styles.scheduleRow__item}>Время</span>
+      <span className={styles.scheduleRow__item}>Дата</span>
+      <span/>
+    </p>;
+
+  const tableGroupsHead =
+    <p className={styles.groupRow}>
+      <span className={styles.groupRow__item}>Номер</span>
+      <span className={styles.groupRow__item}>Название курса</span>
+      <span className={styles.groupRow__item}>Направление</span>
+      <span className={styles.groupRow__item}>Группа</span>
+    </p>;
+
+  return loading ? <div>Загрузка...</div> : (
     <>
       <Page title="Моё расписание:">
-        <Table title="Мои группы:">
-          <div className={styles.groupItem}>
-            <span>1.</span>
-            <span>Английский язык</span>
-            <span>Подготовка к цт</span>
-            <span>А-22</span>
-          </div>
-          <div className={styles.groupItem}>
-            <span>2.</span>
-            <span>Испанский язык</span>
-            <span>Пробное занятие</span>
-            <span>К-30</span>
-          </div>
+        {groups && !!groups.length &&
+        <Table title="Мои группы:" headContent={tableGroupsHead}>
+          {groups.map((group, index) => {
+            return (
+              <div className={styles.groupRow} key={group.id}>
+                <span className={styles.groupRow__item}>{index + 1}.</span>
+                <span className={styles.groupRow__item}>{group.program_name}</span>
+                <span className={styles.groupRow__item}>{group.object_name}</span>
+                <span className={styles.groupRow__item}>{group.group_name}</span>
+              </div>
+            )
+          })}
         </Table>
+        }
 
-        <Table title="Расписание:">
-          <div className={styles.scheduleItem}>
-            <span>1.</span>
-            <span>Психология</span>
-            <span>14:00</span>
-            <span>22.11.20</span>
-            <button onClick={() => setActiveModal(true)} className={styles.scheduleItem__link}>Домашнее задание</button>
-          </div>
-          <div className={styles.scheduleItem}>
-            <span>2.</span>
-            <span>HTML</span>
-            <span>08:00</span>
-            <span>22.11.20</span>
-            <button onClick={() => setActiveModalSecond(true)} className={styles.scheduleItem__link}>Домашнее задание</button>
-          </div>
-          <div className={styles.scheduleItem}>
-            <span>3.</span>
-            <span>Английский язык</span>
-            <span>10:00</span>
-            <span>22.11.20</span>
-            <Button primary>Подключиться</Button>
-          </div>
-          <div className={styles.scheduleItem}>
-            <span>4.</span>
-            <span>Испанский язык</span>
-            <span>11:00</span>
-            <span>22.11.20</span>
-            <Button disabled={true}>Подключиться</Button>
-          </div>
-          <div className={styles.scheduleItem}>
-            <span>5.</span>
-            <span>JavaScript</span>
-            <span>14:00</span>
-            <span>22.11.20</span>
-            <Button disabled={true}>Подключиться</Button>
-          </div>
+        {lessons && !!lessons.length &&
+        <Table title="Расписание:" headContent={tableScheduleHead}>
+          {lessons.map((lesson, index) => {
+            return (
+              <div className={styles.scheduleRow} key={lesson.id}>
+                <span className={styles.scheduleRow__item}>{index + 1}.</span>
+                <span className={styles.scheduleRow__item}>{lesson.name}</span>
+                <span className={styles.scheduleRow__item}>{moment(lesson.date_time).tz('Europe/Minsk').format("HH:mm")}</span>
+                <span className={styles.scheduleRow__item}>{moment(lesson.date_time).tz('Europe/Minsk').format("L")}</span>
+                {!!lesson.homework.length ?
+                  <button onClick={() => handleShowHomeworkModal(lesson.homework)} className={styles.scheduleRow__link}>Домашнее задание</button>
+                  :
+                  lesson.videolink ?
+                  <a href={lesson.videolink} className={styles.scheduleRow__videolink}>
+                    <img className={styles.scheduleRow__videoIcon} src={videoIcon} alt="video"/>
+                    Подключиться
+                  </a>
+                  :
+                  <span/>
+                }
+              </div>
+            )
+          })}
         </Table>
+        }
       </Page>
-      <Modal setActive={setActiveModal} active={activeModal} title="Домашнее задание">
-        <p className={styles.homework}>1. Типы темперамента</p>
-        <p className={styles.homework}>2. Типы характера</p>
-        <p className={styles.homework}>3. Задание №39</p>
+
+      <Modal setActive={handleCloseModal} active={activeModal} title="Домашнее задание">
+        {homeworks.map((homework, index) => {
+          return (
+            <p className={styles.homework} key={index}>{index + 1}. {homework}</p>
+          )
+        })}
       </Modal>
-      <Modal setActive={setActiveModalSecond} active={activeModalSecond} title="Домашнее задание">
-        <p className={styles.homework}>1. Виды разметки</p>
-        <p className={styles.homework}>2. Гиперссылки</p>
-        <p className={styles.homework}>3. Виды списков</p>
-        <p className={styles.homework}>4. Задание №3</p>
-      </Modal>
+
     </>
   )
 }

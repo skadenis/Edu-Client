@@ -8,16 +8,19 @@ const Input = (props) => {
     field.onChange({target: {value: e.target.value, name: e.target.name}});
   }, [field]);
   return (
-    <input
-      className={styles.input}
-      type={props.type ?? "text"}
-      placeholder={props.placeholder}
-      onChange={props.onChange ?? onChange}
-      name={props.name}
-      disabled={props.disabled}
-      value={props.value ?? field.value}
-      {...props}
-    />
+    <div className={styles.input}>
+      {props.label && <p className={styles.input__label}>{props.label}</p>}
+      <input
+        className={styles.input__field}
+        type={props.type ?? "text"}
+        placeholder={props.placeholder}
+        onChange={props.onChange ?? onChange}
+        name={props.name}
+        disabled={props.disabled}
+        value={props.value ?? field.value}
+        {...props}
+      />
+    </div>
   )
 }
 

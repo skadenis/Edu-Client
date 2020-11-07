@@ -1,7 +1,17 @@
 .table {
-  border-radius: 4px;
-  background-color: #e9ecf7;
-  margin-bottom: 20px;
+  &__wrapper {
+    border-radius: 4px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+  }
+
+  &__head {
+    background-color: #f1f1f1;
+    border-radius: 4px 4px 0 0;
+    border-bottom: 1px solid #ddd;
+    font-weight: 600;
+  }
 
   &__title {
     font-weight: 600;
@@ -13,5 +23,6 @@
 
   &__content {
     width: 100%;
+    background-color: #eef0f7;
   }
 }
