@@ -9,7 +9,7 @@ const Header = ({user, setIsAuth}) => {
 
   const handleLogout = () => {
     console.log(user ?? "");
-    localStorage.removeItem("AuthToken");
+    localStorage.removeItem("ChildAuthToken");
     setIsAuth(false);
   }
 
@@ -19,7 +19,7 @@ const Header = ({user, setIsAuth}) => {
         <Logo className={styles.logo}/>
       </NavLink>
       {user &&
-      <div onClick={() => console.log("Выйти")} className={styles.logout}>
+      <div className={styles.logout}>
         <button className={styles.logout__button} onClick={() => setActiveList(!activeList)}>{`${user.surname} ${user.name}`}</button>
         {activeList &&
         <div className={styles.logout__list}>

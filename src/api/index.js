@@ -15,6 +15,7 @@ export const authApi = {
         const data = await instance.post(`childs/auth`, auth);
         if (data.data.status === 200) {
           localStorage.setItem("ChildAuthToken", data.data.token);
+          instance.defaults.headers['Authorization'] = `Bearer ${data.data.token}`;
           resolve(data.data);
         } else {
           reject("Неверный логин или пароль");

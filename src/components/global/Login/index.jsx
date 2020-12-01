@@ -17,16 +17,13 @@ const Login = ({active, setIsAuth}) => {
 
   const login = async (values) => {
     setLoading(true);
-    try {
-      const data = await authApi.login(values);
-      console.log(data);
-      setIsAuth(true);
-      history.push("/");
-    } catch (e) {
-      setError(e);
-    } finally {
-      setLoading(false);
-    }
+    authApi.login(values)
+      .then(() => {
+        setIsAuth(true);
+        history.push("/");
+      })
+      .catch(e => setError(e))
+      .finally(() => setLoading(false));
   }
 
   return (
