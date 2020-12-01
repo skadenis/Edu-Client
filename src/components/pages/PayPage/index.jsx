@@ -1,70 +1,37 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useState} from "react";
+import classNames from "classnames";
 import styles from "./styles.module.scss";
+import ERIP from "../../../assets/erip.jpg"
+import Cards from "../../../assets/cards.jpg"
 import Page from "../../ui/Page";
-import money from "../../../assets/money.png"
-import Table from "../../ui/Table";
-import moment from "moment";
-import cashbox from "../../../assets/cashbox.svg"
-import {userApi} from "../../../api";
-import UserContext from "../../../contexts";
+import Erip from "./components/Erip";
 
 const PayPage = () => {
-
-  const [loading, setLoading] = useState(false);
-  const [bills, setBills] = useState([]);
-  const user = useContext(UserContext);
-
-  useEffect(() => {
-    const fetchBills = async () => {
-      setLoading(true);
-      try {
-        const data = await userApi.getUserBills();
-        setBills(data);
-      } catch (e) {
-        console.log("Get bills error: ", e);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchBills()
-  }, []);
-
-  const tableHead =
-    <p className={styles.payTableRow}>
-      <span className={styles.payTableRow__item}>Дата счёта</span>
-      <span className={styles.payTableRow__item}>Номер</span>
-      <span className={styles.payTableRow__item}>Описание</span>
-      <span className={styles.payTableRow__item}>Сумма</span>
-      <span className={styles.payTableRow__item}/>
-    </p>;
-
+  const [activeTab, setActiveTab] = useState("erip")
   return (
     <Page title="Оплата">
-      <div className={styles.payHead}>
-        <p className={styles.payHead__text}>Баланс счета: <img src={money} alt="cash" className={styles.payHead__img}/> <span className={styles.payHead__bold}>{Number(user.wallet).toFixed(2)}</span> BYN</p>
-        <a className={styles.payHead__link} href="/">Пополнить</a>
+      <div className={styles.pay__actions}>
+        <button
+          className={classNames(styles.pay__btn, {[styles.active]: activeTab === "erip"})}
+          onClick={() => setActiveTab("erip")}
+        >
+          <img className={styles.pay__btnImg} src={ERIP} alt="erip"/>
+          <span className={styles.pay__btnText}>{activeTab === "erip" ? "Выбрано" : "Выбрать"}</span>
+        </button>
+        <button
+          className={classNames(styles.pay__btn, {[styles.active]: activeTab === "cards"})}
+          onClick={() => setActiveTab("cards")}
+        >
+          <img className={styles.pay__btnImg} src={Cards} alt="cards"/>
+          <span className={styles.pay__btnText}>{activeTab === "cards" ? "Выбрано" : "Выбрать"}</span>
+        </button>
       </div>
 
-      {loading ? <div>Загрузка... </div> : (bills && !!bills.length) ?
-        <Table title="Список счетов" headContent={tableHead}>
-          {bills.map(bill => {
-            return (
-              <p className={styles.payTableRow} key={bill.id}>
-                <span className={styles.payTableRow__item}>{moment(bill.date).format("L")}</span>
-                <span className={styles.payTableRow__item}>{bill.id}</span>
-                <span className={styles.payTableRow__item}>{bill.description}</span>
-                <span className={styles.payTableRow__item}>{Number(bill.amount).toFixed(2)}</span>
-                <a className={styles.payTableRow__link} href="/">
-                  <img className={styles.payTableRow__icon} src={cashbox} alt="cashbox"/>
-                  Оплатить
-                </a>
-              </p>
-            )
-          })}
-        </Table>
-        :
-        <p className={styles.pay__empty}>У вас нет неоплаченных счетов</p>
-      }
+      {activeTab === "erip" ? (
+        <Erip />
+      ) : (
+        <div className={styles.pay__content}>Cards</div>
+      )}
     </Page>
   )
 }

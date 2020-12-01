@@ -49,7 +49,7 @@ const Login = ({active, setIsAuth}) => {
             </Formik>
           </Card>
           <Logo className={styles.login__logo}/>
-          <a className={styles.login__phone} href="tel:+3752911111111">Нужна помощь? <br/> Звони - +375291111111</a>
+          <a className={styles.login__phone} href="tel:+375447909020">Нужна помощь? <br/> Звони - +375447909020</a>
         </div>
       </div>
     </div>

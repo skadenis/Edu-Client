@@ -1,0 +1,74 @@
+.pay {
+  width: 100%;
+
+  &__empty {
+    margin-bottom: 10px;
+  }
+}
+
+.payHead {
+  text-align: right;
+
+  &__text {
+    font-size: 14px;
+    line-height: 19px;
+    color: #000;
+    margin-bottom: 8px;
+  }
+
+  &__bold {
+    font-weight: 600;
+  }
+
+  &__img {
+    margin-bottom: -3px;
+  }
+
+  &__link {
+    text-decoration: none;
+    border: none;
+    background: none;
+    color: #556fb7;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.payTableRow {
+  display: grid;
+  grid-template-columns: 130px 130px 1fr 100px 1fr;
+  align-items: center;
+
+  &__item {
+    padding: 10px 20px;
+    border-right: 1px solid #ddd;
+    text-align: center;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  &__link {
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    background: none;
+    color: #556fb7;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__icon {
+    height: 20px;
+    margin-right: 8px;
+  }
+}

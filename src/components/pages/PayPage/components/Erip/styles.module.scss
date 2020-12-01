@@ -1,0 +1,74 @@
+.erip {
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  &__orderNum {
+    font-size: 34px;
+    line-height: 48px;
+    font-weight: 600;
+  }
+
+  &__date {
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 600;
+  }
+
+  &__descr {
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 30px;
+  }
+
+  &__total {
+    font-size: 24px;
+    line-height: 26px;
+    font-weight: 600;
+    margin-bottom: 80px;
+  }
+
+  &__variantDescr {
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 10px;
+  }
+
+  &__text {
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  &__variants {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 40px;
+    margin-bottom: 30px;
+  }
+
+  &__variantTitle {
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  &__info {
+    padding-left: 40px;
+  }
+
+  &__print {
+    display: block;
+    margin: 20px auto 40px;
+    max-width: 120px;
+    width: 100%;
+    border-radius: 4px;
+  }
+}
+
+.fw600 {
+  font-weight: 600;
+}
