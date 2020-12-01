@@ -1,0 +1,22 @@
+.cards {
+  &__descr {
+    font-size: 16px;
+    line-height: 24px;
+
+    .fw600 {
+      font-size: 16px;
+      line-height: 24px;
+    }
+  }
+
+  &__print {
+    display: block;
+    max-width: 120px;
+    width: 100%;
+    margin: 30px auto 20px;
+  }
+}
+
+.fw600 {
+  font-weight: 600;
+}

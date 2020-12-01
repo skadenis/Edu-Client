@@ -2,17 +2,12 @@ import React from "react";
 import styles from "./styles.module.scss";
 import classNames from "classnames";
 import Button from "../../../../form/Button";
+import Total from "../Total";
 
 const Erip = () => {
   return (
-    <div className={styles.pay__content}>
-      <div className={styles.erip__head}>
-        <span className={styles.erip__orderNum}>Счет № 5269821</span>
-        <span className={styles.erip__date}>27.11.2020</span>
-      </div>
-
-      <div className={styles.erip__descr}>Облачный хостинг (id 13446), согласно публичному договору возмездного оказания услуг облачного хостинга</div>
-      <div className={styles.erip__total}>Сумма: 800.00 руб.</div>
+    <div>
+      <Total />
       <div className={styles.erip__variantDescr}>Выберите подходящий вам способ оплаты через банкоматы, инфокиоски или интернет-банкинг с помощью системы "Расчет" (ЕРИП):</div>
 
       <div className={styles.erip__variants}>
