@@ -42,7 +42,7 @@ const OrderPage = () => {
   return (
     <Page title="Оплата">
       <div className={styles.payHead}>
-        <p className={styles.payHead__text}>Баланс счета: <img src={money} alt="cash" className={styles.payHead__img}/> <span className={styles.payHead__bold}>{Number(user.wallet).toFixed(2)}</span> BYN</p>
+        {user && <p className={styles.payHead__text}>Баланс счета: <img src={money} alt="cash" className={styles.payHead__img}/> <span className={styles.payHead__bold}>{Number(user.wallet).toFixed(2)}</span> BYN</p>}
       </div>
 
       {loading ? <div>Загрузка... </div> : (bills && !!bills.length) ?
