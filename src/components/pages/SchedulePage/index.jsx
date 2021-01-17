@@ -17,30 +17,59 @@ const SchedulePage = () => {
   const [homeworks, setHomeworks] = useState([]);
 
   useEffect(() => {
-    const fetchGroups = async () => {
-      setLoading(true);
-      try {
-        const data = await userApi.getGroupsList();
-        setGroups(data);
-      } catch (e) {
-        console.log("Get groups list error: ", e);
-      } finally {
-        setLoading(false);
-      }
-    }
-    const fetchLessons = async () => {
-      setLoading(true);
-      try {
-        const data = await userApi.getUserLessons();
-        setLessons(data);
-      } catch (e) {
-        console.log("Get lessons list error: ", e);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchGroups();
-    fetchLessons();
+
+          const fetchGroups = async () => {
+              setLoading(true);
+              try {
+                  const data = await userApi.getGroupsList();
+                  setGroups(data);
+              } catch (e) {
+                  console.log("Get groups list error: ", e);
+              } finally {
+                  setLoading(false);
+              }
+          }
+          const fetchLessons = async () => {
+              setLoading(true);
+              try {
+                  const data = await userApi.getUserLessons();
+                  setLessons(data);
+
+
+              } catch (e) {
+                  console.log("Get lessons list error: ", e);
+              } finally {
+                  setLoading(false);
+              }
+          }
+
+          const fetchLessonsTimeout = async () => {
+              try {
+                  const data = await userApi.getUserLessons();
+                  setLessons(data);
+              } catch (e) {
+                  console.log("Get lessons list error: ", e);
+              }
+          }
+
+          const fetchGroupsTimeout = async () => {
+              try {
+                  const data = await userApi.getGroupsList();
+                  setGroups(data);
+              } catch (e) {
+                  console.log("Get groups list error: ", e);
+              }
+          }
+
+      fetchGroups();
+      fetchLessons();
+
+      const intervalId = setInterval(() => {
+          fetchGroupsTimeout();
+          fetchLessonsTimeout();
+      },10000);
+      return () => clearInterval(intervalId); //This is important
+
   }, []);
 
   const handleShowHomeworkModal = (lessonHomeworks) => {
